@@ -1,0 +1,100 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">;
+    <title> AMAMA</title>
+    </title>
+
+    </title>
+    <link rel="stylesheet" href="/css/main.css">
+    
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list">
+                <li class="main-header__item"><a class="active" href="/">Shop</a></li>
+                <li class="main-header__item"><a href="/admin/add-product">Add Product</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <body>
+        
+
+        <main>
+            <h1>My Products</h1>
+            <p>List of all the products...</p>
+            <!-- <div class="grid">
+            <article class="card product-item">
+                <header class="card__header">
+                    <h1 class="product__title">Great Book</h1>
+                </header>
+                <div class="card__image">
+                    <img src="https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png" alt="A Book">
+                </div>
+                <div class="card__content">
+                    <h2 class="product__price">$19.99</h2>
+                    <p class="product__description">A very interesting book about so many even more interesting things!</p>
+                </div>
+                <div class="card__actions">
+                    <button class="btn">Add to Cart</button>
+                </div>
+            </article>
+        </div> -->
+        <!-- </main>
+    </body>
+
+    </html> --> -->
+
+    <%- include('fragments/head.ejs')%>
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+     <!--include navigation.ejs-->
+     <%- include('fragments/navigation.ejs')%>
+
+
+    <main>
+        <h1>My Products</h1>
+        <p>List of all the products...</p>
+        <% for (let product of prods) {%>
+        <div class="grid">
+            <article class="card product-item">
+                <header class="card__header">
+                    <h1 class="product__title"><%= product.title%> $<%= product.price%></h1>
+                </header>
+                <div class="card__image">
+                    <img src="<%=product.imageUrl%>" alt="A Book">
+                </div>
+                <div class="card__content">
+                    <h2 class="product__price"><%= product.price%></h2>
+                    <p class="product__description">A very interesting book about so many even more interesting things!</p>
+                </div>
+                <div class="card__actions">
+                    <a class="btn btn-primary" href="/viewDetalPage/<%= product._id%>" role="button" > View Detail </a>
+                </div>
+                <div class="card__actions">
+                    <a class="btn btn-primary" href="/editProduct/<%= product._id%>" role="button" > Edit </a>
+                </div>
+
+                
+            <div class="card__actions">
+
+                <form action = "/delete-product" method="POST">
+                    <input type="hidden" name="id" value="<%= product._id%>">
+                    <button type = "submit" class="btn btn-danger" >Delete</button>
+                </form>
+                <form action="/add-to-cart" method="POST">
+                    <input type="hidden" name="id" value="<%=product.id%>">
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                </form>
+            </div>
+    
+            </article>
+        </div> 
+       <% }%>
+    </main>
+<!--include end.ejs-->
+<%- include('fragments/end.ejs')%>
